@@ -2,11 +2,13 @@ package com.sample.Entity;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -15,6 +17,7 @@ import javax.persistence.Table;
  * @author Naveen kumar
  *
  */
+
 @Entity
 @Table(name="course")
 @SequenceGenerator(name="course_id_seq", initialValue = 1)
@@ -34,6 +37,9 @@ public class Course implements Serializable {
 
 	@Column(name="course_name")
 	private String courseName;
+	
+	@OneToOne(mappedBy = "course", cascade = CascadeType.ALL)
+	private Student sudent;
 	
 	public int getCourseId() {
 		return courseId;

@@ -1,14 +1,14 @@
 package com.sample.Entity;
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -19,7 +19,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "student")
-@SequenceGenerator(name="student_id_seq" , initialValue = 1)
+@SequenceGenerator(name = "student_id_seq", initialValue = 1)
 public class Student implements Serializable {
 
 	/**
@@ -38,25 +38,26 @@ public class Student implements Serializable {
 	@Column(name = "course_name")
 	private String courseName;
 
-	@Column(name = "course_id")
-	private int courseId;
+	@Column(name = "course_id_ref")
+	private int courseIdRef;
 
-	@OneToMany
-	private List<Course> course;
+	@OneToOne
+	@JoinColumn
+	private Course course;
 
 	public int getCourseId() {
-		return courseId;
+		return courseIdRef;
 	}
 
-	public void setCourseId(int courseId) {
-		this.courseId = courseId;
+	public void setCourseId(int courseIdRef) {
+		this.courseIdRef = courseIdRef;
 	}
 
-	public List<Course> getCourse() {
+	public Course getCourse() {
 		return course;
 	}
 
-	public void setCourse(List<Course> course) {
+	public void setCourse(Course course) {
 		this.course = course;
 	}
 
